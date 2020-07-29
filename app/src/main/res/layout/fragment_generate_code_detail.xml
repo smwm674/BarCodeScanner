@@ -1,0 +1,1274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".fragments.GenerateCodeDetail">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/email_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/viewHeight"
+                        android:layout_marginTop="@dimen/viewHeight"
+                        android:layout_marginRight="@dimen/viewHeight"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/email_layout_cardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/spacing_medium">
+
+                                <ImageView
+                                    android:id="@+id/email_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:minWidth="@dimen/spacing_xlarge"
+                                    android:minHeight="@dimen/spacing_xlarge"
+                                    card_view:srcCompat="@drawable/ic_email" />
+
+                                <TextView
+                                    android:id="@+id/email"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/email_icon"
+                                    android:text="@string/email"
+                                    android:textAppearance="?android:textAppearanceMedium" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/email_layout_cardview"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_medium">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/to"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/email_to"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="textEmailAddress"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/subject"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/email_subject"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="textEmailSubject"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/message"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/email_message"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/message_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/viewHeight"
+                        android:layout_marginTop="@dimen/viewHeight"
+                        android:layout_marginRight="@dimen/viewHeight"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/message_layout_cardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/spacing_medium">
+
+                                <ImageView
+                                    android:id="@+id/message_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:minWidth="@dimen/spacing_xlarge"
+                                    android:minHeight="@dimen/spacing_xlarge"
+                                    card_view:srcCompat="@drawable/ic_message" />
+
+                                <TextView
+                                    android:id="@+id/message"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/message_icon"
+                                    android:text="@string/message"
+                                    android:textAppearance="?android:textAppearanceMedium" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/message_layout_cardview"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_medium">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.125"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="@dimen/spacing_medium"
+                                        android:layout_weight="1"
+                                        android:clipChildren="false"
+                                        android:hint="@string/to"
+                                        android:padding="@dimen/spacing_medium">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/message_to"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/viewHeight"
+                                            android:layout_marginBottom="4dp"
+                                            android:background="@drawable/border_bg_gray"
+                                            android:drawablePadding="@dimen/spacing_medium"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="phone"
+                                            android:padding="@dimen/spacing_medium"
+                                            android:textColor="@color/overlay_dark_80"
+                                            android:translationY="4dp" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <ImageButton
+                                        android:id="@+id/message_add"
+                                        style="@style/Widget.AppCompat.Button.Borderless"
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight=".125"
+                                        card_view:srcCompat="@drawable/ic_add"></ImageButton>
+                                </LinearLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/message"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/message_message"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/location_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/viewHeight"
+                        android:layout_marginTop="@dimen/viewHeight"
+                        android:layout_marginRight="@dimen/viewHeight"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/location_layout_cardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/spacing_medium">
+
+                                <ImageView
+                                    android:id="@+id/location_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:minWidth="@dimen/spacing_xlarge"
+                                    android:minHeight="@dimen/spacing_xlarge"
+                                    card_view:srcCompat="@drawable/ic_location" />
+
+                                <TextView
+                                    android:id="@+id/location"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/location_icon"
+                                    android:text="@string/location"
+                                    android:textAppearance="?android:textAppearanceMedium" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/location_layout_cardview"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_medium">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/latitude"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/location_latitude"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="numberDecimal"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/longitude"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/location_longitude"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="numberDecimal"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <!-- <fragment
+                                     android:id="@+id/map"
+                                     android:layout_marginTop="@dimen/spacing_medium"
+                                     android:layout_marginBottom="@dimen/spacing_medium"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="172dp"
+                                     class="com.google.android.gms.maps.MapFragment"></fragment>-->
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/event_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/viewHeight"
+                        android:layout_marginTop="@dimen/viewHeight"
+                        android:layout_marginRight="@dimen/viewHeight"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/event_layout_cardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/spacing_medium">
+
+                                <ImageView
+                                    android:id="@+id/event_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:minWidth="@dimen/spacing_xlarge"
+                                    android:minHeight="@dimen/spacing_xlarge"
+                                    card_view:srcCompat="@drawable/ic_event" />
+
+                                <TextView
+                                    android:id="@+id/event"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/event_icon"
+                                    android:text="@string/event"
+                                    android:textAppearance="?android:textAppearanceMedium" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/event_layout_cardview"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_medium">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/title"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event_title"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/location"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event_location"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/description"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event_description"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/begin_time"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event_begin_time"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/end_time"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event_end_time"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/contact_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/viewHeight"
+                        android:layout_marginTop="@dimen/viewHeight"
+                        android:layout_marginRight="@dimen/viewHeight"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/contact_layout_cardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/spacing_medium">
+
+                                <ImageView
+                                    android:id="@+id/contact_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:minWidth="@dimen/spacing_xlarge"
+                                    android:minHeight="@dimen/spacing_xlarge"
+                                    card_view:srcCompat="@drawable/ic_contact" />
+
+                                <TextView
+                                    android:id="@+id/contact"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/contact_icon"
+                                    android:text="@string/contact"
+                                    android:textAppearance="?android:textAppearanceMedium" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/contact_layout_cardview"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_medium">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/full_name"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/contact_full_name"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="textPersonName"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/address"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/contact_address"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="textPostalAddress"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/phone"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/contact_phone"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/email"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/contact_email"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="textEmailAddress"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <Button
+                                    android:id="@+id/contact_import"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/viewHeight"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:background="@drawable/button_primary"
+                                    android:drawableLeft="@drawable/ic_person"
+                                    android:drawablePadding="@dimen/spacing_medium"
+                                    android:drawableTint="@android:color/white"
+                                    android:text="@string/import_contact"
+                                    android:textColor="@android:color/white" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/telephone_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/viewHeight"
+                        android:layout_marginTop="@dimen/viewHeight"
+                        android:layout_marginRight="@dimen/viewHeight"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/telephone_layout_cardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/spacing_medium">
+
+                                <ImageView
+                                    android:id="@+id/telephone_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:minWidth="@dimen/spacing_xlarge"
+                                    android:minHeight="@dimen/spacing_xlarge"
+                                    card_view:srcCompat="@drawable/ic_telephone" />
+
+                                <TextView
+                                    android:id="@+id/telephone"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/telephone_icon"
+                                    android:text="@string/telephone"
+                                    android:textAppearance="?android:textAppearanceMedium" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/telephone_layout_cardview"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_medium">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/number"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/telephone_number"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="phone"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <Button
+                                    android:id="@+id/telephone_import"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/viewHeight"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:background="@drawable/button_primary"
+                                    android:drawableLeft="@drawable/ic_person"
+                                    android:drawablePadding="@dimen/spacing_medium"
+                                    android:drawableTint="@android:color/white"
+                                    android:text="@string/import_number"
+                                    android:textColor="@android:color/white" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/text_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/viewHeight"
+                        android:layout_marginTop="@dimen/viewHeight"
+                        android:layout_marginRight="@dimen/viewHeight"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/text_layout_cardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/spacing_medium">
+
+                                <ImageView
+                                    android:id="@+id/text_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:minWidth="@dimen/spacing_xlarge"
+                                    android:minHeight="@dimen/spacing_xlarge"
+                                    card_view:srcCompat="@drawable/ic_text" />
+
+                                <TextView
+                                    android:id="@+id/text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/text_icon"
+                                    android:text="@string/text"
+                                    android:textAppearance="?android:textAppearanceMedium" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/text_layout_cardview"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_medium">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/text"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/text_text"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:minLines="5"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/wifi_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/viewHeight"
+                        android:layout_marginTop="@dimen/viewHeight"
+                        android:layout_marginRight="@dimen/viewHeight"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/wifi_layout_cardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/spacing_medium">
+
+                                <ImageView
+                                    android:id="@+id/wifi_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:minWidth="@dimen/spacing_xlarge"
+                                    android:minHeight="@dimen/spacing_xlarge"
+                                    card_view:srcCompat="@drawable/ic_wifi" />
+
+                                <TextView
+                                    android:id="@+id/wifi"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/wifi_icon"
+                                    android:text="@string/wifi"
+                                    android:textAppearance="?android:textAppearanceMedium" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/wifi_layout_cardview"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_medium">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/ssid"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/wifi_ssid"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:minLines="5"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/password"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/wifi_password"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:minLines="5"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <Spinner
+                                    android:id="@+id/wifi_type"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:padding="@dimen/spacing_medium" />
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/url_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/viewHeight"
+                        android:layout_marginTop="@dimen/viewHeight"
+                        android:layout_marginRight="@dimen/viewHeight"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/url_layout_cardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/spacing_medium">
+
+                                <ImageView
+                                    android:id="@+id/url_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:minWidth="@dimen/spacing_xlarge"
+                                    android:minHeight="@dimen/spacing_xlarge"
+                                    card_view:srcCompat="@drawable/ic_url" />
+
+                                <TextView
+                                    android:id="@+id/url"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/url_icon"
+                                    android:text="@string/url"
+                                    android:textAppearance="?android:textAppearanceMedium" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/url_layout_cardview"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:minHeight="@dimen/viewHeight"
+                            card_view:cardCornerRadius="@dimen/spacing_medium"
+                            card_view:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_medium">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/spacing_medium"
+                                    android:clipChildren="false"
+                                    android:hint="@string/http"
+                                    android:padding="@dimen/spacing_medium">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/url_http"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/viewHeight"
+                                        android:layout_marginBottom="4dp"
+                                        android:background="@drawable/border_bg_gray"
+                                        android:drawablePadding="@dimen/spacing_medium"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:minLines="5"
+                                        android:padding="@dimen/spacing_medium"
+                                        android:textColor="@color/overlay_dark_80"
+                                        android:translationY="4dp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/generated_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/viewHeight"
+                        android:layout_marginTop="@dimen/viewHeight"
+                        android:layout_marginRight="@dimen/viewHeight"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_medium"
+                            card_view:cardCornerRadius="4dp"
+                            card_view:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/spacing_medium">
+
+                                <ImageView
+                                    android:id="@+id/image"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:minWidth="@dimen/spacing_xlarge"
+                                    android:minHeight="@dimen/spacing_xlarge"
+                                    card_view:srcCompat="@drawable/ic_code" />
+
+                                <TextView
+                                    android:id="@+id/label"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/image"
+                                    android:textAppearance="?android:textAppearanceSmall"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/inserted_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/label"
+                                    android:layout_marginLeft="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    android:layout_toRightOf="@+id/image"
+                                    android:textAppearance="?android:textAppearanceSmall" />
+
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/main"
+                    android:layout_marginLeft="@dimen/sideViewWidth"
+                    android:layout_marginTop="@dimen/viewHeight"
+                    android:layout_marginRight="@dimen/sideViewWidth"
+                    android:layout_marginBottom="@dimen/bottomViewWidth" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".fragments.GenerateCode">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/spacing_middle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/viewHeight"
+            android:layout_marginRight="@dimen/viewHeight"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/email_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/viewHeight"
+                android:visibility="gone"
+                card_view:cardCornerRadius="@dimen/spacing_medium"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/email_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:minWidth="@dimen/spacing_xlarge"
+                        android:minHeight="@dimen/spacing_xlarge"
+                        card_view:srcCompat="@drawable/ic_email" />
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:layout_toRightOf="@+id/email_icon"
+                        android:text="@string/email"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/message_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:minHeight="@dimen/viewHeight"
+                android:visibility="gone"
+                card_view:cardCornerRadius="@dimen/spacing_medium"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/message_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:minWidth="@dimen/spacing_xlarge"
+                        android:minHeight="@dimen/spacing_xlarge"
+                        card_view:srcCompat="@drawable/ic_message" />
+
+                    <TextView
+                        android:id="@+id/message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:layout_toRightOf="@+id/message_icon"
+                        android:text="@string/message"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/location_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:minHeight="@dimen/viewHeight"
+                android:visibility="gone"
+                card_view:cardCornerRadius="@dimen/spacing_medium"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/location_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:minWidth="@dimen/spacing_xlarge"
+                        android:minHeight="@dimen/spacing_xlarge"
+                        card_view:srcCompat="@drawable/ic_location" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:layout_toRightOf="@+id/location_icon"
+                        android:text="@string/location"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/event_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:minHeight="@dimen/viewHeight"
+                android:visibility="gone"
+                card_view:cardCornerRadius="@dimen/spacing_medium"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/event_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:minWidth="@dimen/spacing_xlarge"
+                        android:minHeight="@dimen/spacing_xlarge"
+                        card_view:srcCompat="@drawable/ic_event" />
+
+                    <TextView
+                        android:id="@+id/event"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:layout_toRightOf="@+id/event_icon"
+                        android:text="@string/event"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/contact_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:minHeight="@dimen/viewHeight"
+                android:visibility="gone"
+                card_view:cardCornerRadius="@dimen/spacing_medium"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/contact_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:minWidth="@dimen/spacing_xlarge"
+                        android:minHeight="@dimen/spacing_xlarge"
+                        card_view:srcCompat="@drawable/ic_contact" />
+
+                    <TextView
+                        android:id="@+id/contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:layout_toRightOf="@+id/contact_icon"
+                        android:text="@string/contact"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/telephone_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:minHeight="@dimen/viewHeight"
+                android:visibility="gone"
+                card_view:cardCornerRadius="@dimen/spacing_medium"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/telephone_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:minWidth="@dimen/spacing_xlarge"
+                        android:minHeight="@dimen/spacing_xlarge"
+                        card_view:srcCompat="@drawable/ic_telephone" />
+
+                    <TextView
+                        android:id="@+id/telephone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:layout_toRightOf="@+id/telephone_icon"
+                        android:text="@string/telephone"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:minHeight="@dimen/viewHeight"
+                android:visibility="gone"
+                card_view:cardCornerRadius="@dimen/spacing_medium"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/text_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:minWidth="@dimen/spacing_xlarge"
+                        android:minHeight="@dimen/spacing_xlarge"
+                        card_view:srcCompat="@drawable/ic_text" />
+
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:layout_toRightOf="@+id/text_icon"
+                        android:text="@string/text"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wifi_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:minHeight="@dimen/viewHeight"
+                android:visibility="gone"
+                card_view:cardCornerRadius="@dimen/spacing_medium"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/wifi_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:minWidth="@dimen/spacing_xlarge"
+                        android:minHeight="@dimen/spacing_xlarge"
+                        card_view:srcCompat="@drawable/ic_wifi" />
+
+                    <TextView
+                        android:id="@+id/wifi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:layout_toRightOf="@+id/wifi_icon"
+                        android:text="@string/wifi"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/url_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:minHeight="@dimen/viewHeight"
+                android:visibility="gone"
+                card_view:cardCornerRadius="@dimen/spacing_medium"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/url_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:minWidth="@dimen/spacing_xlarge"
+                        android:minHeight="@dimen/spacing_xlarge"
+                        card_view:srcCompat="@drawable/ic_url" />
+
+                    <TextView
+                        android:id="@+id/url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_medium"
+                        android:layout_toRightOf="@+id/url_icon"
+                        android:text="@string/url"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/barcode_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:minHeight="@dimen/viewHeight"
+                    card_view:cardCornerRadius="@dimen/spacing_medium"
+                    card_view:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_medium">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/spacing_medium"
+                            android:clipChildren="false"
+                            android:hint="@string/product_code"
+                            android:padding="@dimen/spacing_medium">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/code"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/viewHeight"
+                                android:layout_marginBottom="4dp"
+                                android:background="@drawable/border_bg_gray"
+                                android:drawablePadding="@dimen/spacing_medium"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:padding="@dimen/spacing_medium"
+                                android:textColor="@color/overlay_dark_80"
+                                android:translationY="4dp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:maxHeight="@dimen/bottomViewWidth"
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardView"
+                    android:layout_marginTop="@dimen/viewHeight"
+                    android:layout_marginBottom="@dimen/bottomViewWidth" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

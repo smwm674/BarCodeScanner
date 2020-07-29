@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/ic_share"
+        android:iconTint="@android:color/white"
+        android:title="@string/share"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/save"
+        android:icon="@drawable/ic_save"
+        android:iconTint="@android:color/white"
+        android:title="@string/save"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/generate"
+        android:icon="@drawable/ic_done"
+        android:iconTint="@android:color/white"
+        android:title="@string/generate"
+        app:showAsAction="always" />
+
+</menu>

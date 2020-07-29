@@ -1,0 +1,83 @@
+<resources>
+    <string name="admob_app_id">"ca-app-pub-3940256099942544~3347511713"</string>
+    <string name="admob_banner">"/6499/example/banner"</string>
+    <string name="admob_interstial">"ca-app-pub-3940256099942544/1033173712"</string>
+    <string name="admob_native">"ca-app-pub-3940256099942544/2247696110"</string>
+
+    <string name="app_name">BarCodeScanner</string>
+    <string name="barcode">"Barcode Scanner"</string>
+    <string name="barcode_generator">"Barcode Generator"</string>
+    <string name="qr_generator">"QR Code Generator"</string>
+    <string name="generated">"Code Generated"</string>
+    <string name="create_qr">"Create QR Code"</string>
+    <string name="create_barcode">"Create Barcode"</string>
+    <string name="flash">Flash Light</string>
+    <string name="setting">Settings</string>
+    <string name="flash_support">Your device does support ths feature.</string>
+    <string name="lookup">Lookup</string>
+    <string name="browser">Open in Browser</string>
+    <string name="share">Share</string>
+    <string name="save">Save</string>
+    <string name="generate">Generate</string>
+    <string name="generate_brcode">Generate Bar Code</string>
+    <string name="sound">Sound</string>
+    <string name="vibrate">Vibrate</string>
+    <string name="feedback">Feedback</string>
+    <string name="Rate">Rate us</string>
+    <string name="Share_app">Share app</string>
+    <string name="more_app">More apps</string>
+    <string name="version">Version: </string>
+    <string name="today">Today Scanned Items</string>
+    <string name="previous">Previous Scanned Items</string>
+    <string name="history">History</string>
+    <string name="favourite">Favourite</string>
+    <string name="no_history">No History Found</string>
+    <string name="no_code">No Generated Code Found</string>
+    <string name="no_favourite">No Favourite Found</string>
+    <string name="email">Email</string>
+    <string name="message">Message</string>
+    <string name="location">Location</string>
+    <string name="event">Event</string>
+    <string name="contact">Contact</string>
+    <string name="telephone">Telephone</string>
+    <string name="text">Text</string>
+    <string name="wifi">Wifi</string>
+    <string name="url">Url</string>
+
+    <string name="product_code">Product Code</string>
+    <string name="to">To</string>
+    <string name="subject">Subject</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="begin_time">Begin Time</string>
+    <string name="end_time">End Time</string>
+    <string name="full_name">Full name</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="import_contact">Import Contact</string>
+    <string name="import_number">Import</string>
+    <string name="number">Number</string>
+    <string name="ssid">SSID/network name</string>
+    <string name="password">Password</string>
+    <string name="http">http://</string>
+
+    <string name="scanned_text">ScannerTextFragment</string>
+    <string name="scanner_main">ScannerFragment</string>
+    <string name="setting_frag">SettingFragment</string>
+    <string name="history_frag">HistoryFragment</string>
+    <string name="history_detailed_frag">HistoryDetailedFragment</string>
+    <string name="favourite_detailed_frag">FavouriteDetailedFragment</string>
+    <string name="generator_frag">GeneratorFragment</string>
+    <string name="generator_frag_detail_bar">GeneratorFragmentDetailBARCODE</string>
+    <string name="generator_frag_detail_qr">GeneratorFragmentDetailQRCODE</string>
+    <string name="generated_frag_code_bar">CodeGeneratedFragmentBARCODE</string>
+    <string name="generated_frag_code_qr">CodeGeneratedFragmentQRCODE</string>
+
+    <string name="camera_permission">Please grant appropriate permission from settings to use the application</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

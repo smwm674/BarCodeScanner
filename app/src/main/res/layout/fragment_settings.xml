@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.Settings">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/spacing_middle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:minHeight="@dimen/viewHeight">
+
+                <TextView
+                    android:id="@+id/version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:text="@string/version"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/appversion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:layout_toRightOf="@+id/version"
+                    android:text="1.15"
+                    android:textAppearance="?android:textAppearanceLarge" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:minHeight="@dimen/viewHeight">
+
+                <ImageView
+                    android:id="@+id/sound_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/spacing_xmlarge"
+                    android:minHeight="@dimen/spacing_xmlarge"
+                    android:tint="@color/amber_900"
+                    app:srcCompat="@drawable/ic_sound" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_toRightOf="@+id/sound_icon"
+                    android:text="@string/sound"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+                <Switch
+                    android:id="@+id/sound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:checked="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:minHeight="@dimen/viewHeight">
+
+                <ImageView
+                    android:id="@+id/vibrate_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/spacing_xmlarge"
+                    android:minHeight="@dimen/spacing_xmlarge"
+                    android:tint="@color/indigo_A400"
+                    app:srcCompat="@drawable/ic_vibration" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_toRightOf="@+id/vibrate_icon"
+                    android:text="@string/vibrate"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+                <Switch
+                    android:id="@+id/vibrate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:checked="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:minHeight="@dimen/viewHeight">
+
+                <ImageView
+                    android:id="@+id/feedback_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/spacing_xmlarge"
+                    android:minHeight="@dimen/spacing_xmlarge"
+                    android:tint="@color/pink_A200"
+                    app:srcCompat="@drawable/ic_feedback" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_toRightOf="@+id/feedback_icon"
+                    android:text="@string/feedback"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:minHeight="@dimen/viewHeight">
+
+                <ImageView
+                    android:id="@+id/more_app_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/spacing_xmlarge"
+                    android:minHeight="@dimen/spacing_xmlarge"
+                    android:tint="@color/deep_purple_A400"
+                    app:srcCompat="@drawable/ic_more" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_toRightOf="@+id/more_app_icon"
+                    android:text="@string/more_app"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rate_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:minHeight="@dimen/viewHeight">
+
+                <ImageView
+                    android:id="@+id/rate_app_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/spacing_xmlarge"
+                    android:minHeight="@dimen/spacing_xmlarge"
+                    app:srcCompat="@drawable/ic_favourite" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_toRightOf="@+id/rate_app_icon"
+                    android:text="@string/Rate"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/share_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:minHeight="@dimen/viewHeight">
+
+                <ImageView
+                    android:id="@+id/share_app_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/spacing_xmlarge"
+                    android:minHeight="@dimen/spacing_xmlarge"
+                    android:tint="@color/purple_A200"
+                    app:srcCompat="@drawable/ic_share" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_toRightOf="@+id/share_app_icon"
+                    android:text="@string/Share_app"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/native_ads"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/viewHeight"
+                android:layout_marginBottom="@dimen/viewHeight">
+
+                <com.google.android.ads.nativetemplates.TemplateView
+                    android:id="@+id/my_template"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:gnt_template_type="@layout/gnt_medium_template_view" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

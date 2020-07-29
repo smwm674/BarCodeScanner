@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".fragments.Scanner">
+
+    <ImageButton
+        android:id="@+id/flash"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="Flash"
+        android:tint="@color/overlay_light_90"
+        app:srcCompat="@drawable/ic_flash_off" />
+
+    <ImageButton
+        android:id="@+id/switch_camera"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_toRightOf="@+id/flash"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="SwitchCamera"
+        android:tint="@color/overlay_light_90"
+        app:srcCompat="@drawable/ic_switch_camera" />
+
+    <ImageButton
+        android:id="@+id/gallery"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentRight="true"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tint="@color/overlay_light_90"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_gallery" />
+
+    <FrameLayout
+        android:id="@+id/Scanner_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/actionBarSize"
+        android:layout_marginBottom="@dimen/actionBarSize"></FrameLayout>
+
+</RelativeLayout>
