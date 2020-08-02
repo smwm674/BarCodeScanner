@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -25,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
@@ -33,13 +36,20 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Result;
+import com.google.zxing.common.HybridBinarizer;
 import com.zydellotechnolgies.barcodescanner.MainActivity;
 import com.zydellotechnolgies.barcodescanner.R;
 import com.zydellotechnolgies.barcodescanner.model.ScanItem;
 import com.zydellotechnolgies.barcodescanner.utils.CustomViewFinderView;
 import com.zydellotechnolgies.barcodescanner.utils.DatabaseHelper;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -98,13 +108,17 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
     }
 
     @BindView(R.id.Scanner_view)
-    FrameLayout contentFrame;
+    ViewGroup contentFrame;
     @BindView(R.id.flash)
     ImageButton flash;
     @BindView(R.id.switch_camera)
     ImageButton switch_camera;
     @BindView(R.id.gallery)
     ImageButton gallery;
+    @BindView(R.id.focus)
+    ImageButton focus;/*
+    @BindView(R.id.seekbar)
+    SeekBar seekbar;*/
     private ZXingScannerView mScannerView;
     private static boolean flash_state = false;
     private static int camera_state = 0;
@@ -114,7 +128,8 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
     private String MyPREFERENCES = "Settings", SoundPrefrences = "Sound", VibratePrefences = "Vibrate";
     private DatabaseHelper mDatabaseHelper = null;
     private InterstitialAd mInterstitialAd;
-    private static final int CAMERA_PERMISSION = 1;
+    private static final int CAMERA_PERMISSION = 1, READ_EXTERNAL_PERMISSION = 2;
+    private static final int PICK_IMAGE = 120;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -135,12 +150,13 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
         mInterstitialAd.setAdUnitId(getString(R.string.admob_interstial));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
-        mScannerView = new ZXingScannerView(getContext()) {
-            @Override
+        mScannerView = new ZXingScannerView(getContext());
+        /* {
+          mScannerView = new ZXingScannerView(getContext()){  @Override
             protected IViewFinder createViewFinderView(Context context) {
                 return new CustomViewFinderView(context);
             }
-        };
+        }*/
         contentFrame.addView(mScannerView);
 
         hasFlash = getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
@@ -163,18 +179,29 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
                 Flash(view);
             }
         });
+        focus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    mScannerView.setAutoFocus(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  pickGallery();
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_EXTERNAL_PERMISSION);
+                } else pickGallery();
             }
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (getActivity().checkSelfPermission(Manifest.permission.CAMERA)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
-            }
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
         }
 
 
@@ -352,7 +379,124 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
 
             } else
                 Toast.makeText(getActivity().getApplicationContext(), getString(R.string.camera_permission), Toast.LENGTH_LONG).show();
+        } else if (requestCode == READ_EXTERNAL_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                pickGallery();
+            } else
+                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.camera_permission), Toast.LENGTH_LONG).show();
         }
     }
 
+    public void pickGallery() {
+        Intent pickIntent = new Intent(Intent.ACTION_PICK);
+        pickIntent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        startActivityForResult(pickIntent, PICK_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_IMAGE) {
+            if (data == null || data.getData() == null) {
+                Log.e("TAG", "The uri is null, probably the user cancelled the image selection process using the back button.");
+                return;
+            }
+            Uri uri = data.getData();
+            try {
+                InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                if (bitmap == null) {
+                    Log.e("TAG", "uri is not a bitmap," + uri.toString());
+                    return;
+                }
+                int width = bitmap.getWidth(), height = bitmap.getHeight();
+                int[] pixels = new int[width * height];
+                bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+                bitmap.recycle();
+                bitmap = null;
+                RGBLuminanceSource source = new RGBLuminanceSource(width, height, pixels);
+                BinaryBitmap bBitmap = new BinaryBitmap(new HybridBinarizer(source));
+                MultiFormatReader reader = new MultiFormatReader();
+                try {
+                    Result rawResult = reader.decode(bBitmap);
+                    //     Toast.makeText(getActivity(), "The content of the QR image is: " + result.getText(), Toast.LENGTH_SHORT).show();
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    } else {
+                        Date calendar = Calendar.getInstance().getTime();
+
+                        SimpleDateFormat time = new SimpleDateFormat("dd/MMM/yyyy");
+                        SimpleDateFormat date = new SimpleDateFormat("hh:mm a");
+
+                        ScanItem item = new ScanItem();
+                        item.setFavourite(false);
+                        item.setType(rawResult.getBarcodeFormat().toString());
+                        item.setScanned_item(rawResult.getText());
+                        item.setDate(calendar);
+                        item.setDay(date.format(calendar));
+                        item.setTime(time.format(calendar));
+                        if (mDatabaseHelper == null)
+                            mDatabaseHelper = new DatabaseHelper(getActivity());
+                        mDatabaseHelper.AddOrUpdateScanItem(item);
+                        mScannerView.stopCamera();
+                        PushFragment(new ScanedText().newInstance(item), getString(R.string.scanned_text));
+                    }
+
+                    mInterstitialAd.setAdListener(new AdListener() {
+                        @Override
+                        public void onAdLoaded() {
+                            // Code to be executed when an ad finishes loading.
+                        }
+
+                        @Override
+                        public void onAdFailedToLoad(int errorCode) {
+                            // Code to be executed when an ad request fails.
+                        }
+
+                        @Override
+                        public void onAdOpened() {
+                            // Code to be executed when the ad is displayed.
+                        }
+
+                        @Override
+                        public void onAdClicked() {
+                            // Code to be executed when the user clicks on an ad.
+                        }
+
+                        @Override
+                        public void onAdLeftApplication() {
+                            // Code to be executed when the user has left the app.
+                        }
+
+                        @Override
+                        public void onAdClosed() {
+                            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                            // Code to be executed when the interstitial ad is closed.
+                            Date calendar = Calendar.getInstance().getTime();
+
+                            SimpleDateFormat time = new SimpleDateFormat("dd/MMM/yyyy");
+                            SimpleDateFormat date = new SimpleDateFormat("hh:mm a");
+
+                            ScanItem item = new ScanItem();
+                            item.setFavourite(false);
+                            item.setType(rawResult.getBarcodeFormat().toString());
+                            item.setScanned_item(rawResult.getText());
+                            item.setDate(calendar);
+                            item.setDay(date.format(calendar));
+                            item.setTime(time.format(calendar));
+                            if (mDatabaseHelper == null)
+                                mDatabaseHelper = new DatabaseHelper(getActivity());
+                            mDatabaseHelper.AddOrUpdateScanItem(item);
+                            mScannerView.stopCamera();
+                            PushFragment(new ScanedText().newInstance(item), getString(R.string.scanned_text));
+                        }
+                    });
+                } catch (NotFoundException e) {
+                    Toast.makeText(getActivity(), "Could Not Process this Image", Toast.LENGTH_SHORT).show();
+                }
+            } catch (FileNotFoundException e) {
+                Toast.makeText(getActivity(), "Could Not Process this Image", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
 }
