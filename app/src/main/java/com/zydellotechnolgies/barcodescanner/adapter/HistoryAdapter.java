@@ -12,6 +12,7 @@ import com.zydellotechnolgies.barcodescanner.MainActivity;
 import com.zydellotechnolgies.barcodescanner.R;
 import com.zydellotechnolgies.barcodescanner.model.ScanItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,13 +32,43 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         TextView date;
         @BindView(R.id.text)
         TextView text;
+        @BindView(R.id.imageView)
+        ImageView selected;
 
         public MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
+
+        void bind(final ScanItem item) {
+            selected.setVisibility(item.isChecked() ? View.VISIBLE : View.GONE);
+            // textView.setText(item.getName());
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    item.setChecked(!item.isChecked());
+                    selected.setVisibility(item.isChecked() ? View.VISIBLE : View.GONE);
+                    return false;
+                }
+            });
+        }
+
     }
 
+    public List<ScanItem> getAll() {
+        return List;
+    }
+
+    public List<ScanItem> getSelected() {
+        List<ScanItem> selected = new ArrayList<>();
+        for (int i = 0; i < List.size(); i++) {
+            if (List.get(i).isChecked()) {
+                selected.add(List.get(i));
+            }
+        }
+        return selected;
+    }
 
     public HistoryAdapter(List<ScanItem> List) {
         this.List = List;
@@ -54,6 +85,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ScanItem list = List.get(position);
+        holder.bind(list);
         holder.date.setText(list.getDay() + " " + list.getTime());
         // holder.text.setText(list.getScanned_item());
 

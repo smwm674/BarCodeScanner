@@ -12,8 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +83,10 @@ public class History extends Fragment {
     CardView previous;
     @BindView(R.id.info)
     TextView info;
+    @BindView(R.id.today_delete)
+    ImageView today_delete;
+    @BindView(R.id.prev_delete)
+    ImageView prev_delete;
     private HistoryAdapter mAdapter, prev_mAdapter;
     private ArrayList<ScanItem> today_list = new ArrayList<>();
     private ArrayList<ScanItem> previous_list = new ArrayList<>();
@@ -145,7 +154,62 @@ public class History extends Fragment {
 
             }
         }));
+
+        today_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mAdapter.getSelected().size() > 0) {
+                    if (mDatabaseHelper == null)
+                        mDatabaseHelper = new DatabaseHelper(getActivity());
+                    mDatabaseHelper.delete_list((ArrayList<ScanItem>) mAdapter.getSelected());
+                    prepareData();
+                } else
+                    Toast.makeText(getContext(), getString(R.string.item_not_selected), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        prev_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (prev_mAdapter.getSelected().size() > 0) {
+                    if (mDatabaseHelper == null)
+                        mDatabaseHelper = new DatabaseHelper(getActivity());
+                    mDatabaseHelper.delete_list((ArrayList<ScanItem>) prev_mAdapter.getSelected());
+                    prepareData();
+                } else
+                    Toast.makeText(getContext(), getString(R.string.item_not_selected), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         return root;
+    }
+
+    MenuItem delete = null;
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.history_menu, menu);
+        delete = menu.findItem(R.id.delete);
+        if (today_list.size() > 0 || previous_list.size() > 0) delete.setVisible(true);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete:
+                if (item != null) {
+                    if (mDatabaseHelper == null)
+                        mDatabaseHelper = new DatabaseHelper(getActivity());
+                    mDatabaseHelper.delete();
+                    prepareData();
+                    delete.setVisible(false);
+                }
+                break;
+        }
+        return true;
+
     }
 
     void prepareData() {

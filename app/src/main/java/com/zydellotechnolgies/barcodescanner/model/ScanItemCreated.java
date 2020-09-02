@@ -32,6 +32,15 @@ public class ScanItemCreated implements Serializable {
     private Date date;
     @DatabaseField(columnName = TABLE_SCAN_ITEMS_FAVOURITE)
     boolean favourite;
+    private boolean isChecked = false;
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public int getId() {
         return id;
