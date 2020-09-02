@@ -17,6 +17,9 @@
     <string name="lookup">Lookup</string>
     <string name="browser">Open in Browser</string>
     <string name="share">Share</string>
+    <string name="delete">Clear All</string>
+    <string name="item_not_selected">No item selected for delete \n
+        Select Item by long click on that item</string>
     <string name="save">Save</string>
     <string name="generate">Generate</string>
     <string name="generate_brcode">Generate Bar Code</string>

@@ -107,6 +107,17 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return new ArrayList<>();
     }
 
+    public void delete_list(ArrayList<ScanItem> List) {
+        try {
+            if (List.size() > 0)
+                for (int i = 0; i < List.size(); i++) {
+                    getScanItemsDao().delete(List.get(i));
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     //Scan Item Created
     public Dao<ScanItemCreated, String> getScanItemsCreatedDao() throws SQLException {
         if (ScanItemCreatedDao == null) {
@@ -157,10 +168,22 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return new ArrayList<>();
     }
 
+    public void delete() {
+        try {
+            if (getScanItems().size() > 0)
+                getScanItemsDao().deleteBuilder().delete();
+            if (getScanItemsCreated().size() > 0)
+                getScanItemsCreatedDao().deleteBuilder().delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void close() {
         super.close();
         ScanItemDao = null;
         ScanItemCreatedDao = null;
     }
+
 }
