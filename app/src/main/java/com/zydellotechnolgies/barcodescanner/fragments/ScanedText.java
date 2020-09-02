@@ -45,6 +45,7 @@ import com.zydellotechnolgies.barcodescanner.model.ScanItem;
 import com.zydellotechnolgies.barcodescanner.utils.DatabaseHelper;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -102,7 +103,7 @@ public class ScanedText extends Fragment {
     private static boolean isFavourite = false;
     private DatabaseHelper mDatabaseHelper = null;
 
-   // private static final int PERMISSION_FINE_LOCATION = 0;
+    private static final int PERMISSION_FINE_LOCATION = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -276,8 +277,8 @@ public class ScanedText extends Fragment {
                 info.setText(item.getScanned_item().substring(item.getScanned_item().indexOf("S:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("S:") + 3)));
                 lookup.setText("WIFI");
                 information.setText(Html.fromHtml("<b>" + "SSID/Network Name" + "</b>" + "<br>" + item.getScanned_item().substring(item.getScanned_item().indexOf("S:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("S:") + 3))
-                        + "<b>" + "<br>" +"Type" + "</b>" + "<br>" + item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("T:") + 3))
-                        + "<b>"  + "<br>" +"Password" + "</b>" + "<br>" + item.getScanned_item().substring(item.getScanned_item().indexOf("P:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("P:") + 3))));
+                        + "<b>" + "<br>" + "Type" + "</b>" + "<br>" + item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("T:") + 3))
+                        + "<b>" + "<br>" + "Password" + "</b>" + "<br>" + item.getScanned_item().substring(item.getScanned_item().indexOf("P:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("P:") + 3))));
 
             } else if (item.getScanned_item().contains("https://")) //url
             {
@@ -443,9 +444,9 @@ public class ScanedText extends Fragment {
                 Toast.LENGTH_LONG).show();*/
     }
 
-    /*@Override
+    @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[],
-                               int[] grantResults) {
+                                           int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_FINE_LOCATION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -455,6 +456,7 @@ public class ScanedText extends Fragment {
                         Connect_WIFI(wifiManager);
                     } else {
                         wifiManager.setWifiEnabled(true);
+                        Connect_WIFI(wifiManager);
                     }
                 } catch (Exception e) {
                     startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
@@ -463,7 +465,7 @@ public class ScanedText extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(), getString(R.string.camera_permission), Toast.LENGTH_LONG).show();
         }
     }
-*/
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.scanned_text, menu);
@@ -492,11 +494,10 @@ public class ScanedText extends Fragment {
         String networkSSID = item.getScanned_item().substring(item.getScanned_item().indexOf("S:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("S:") + 3));
         String networkPass = item.getScanned_item().substring(item.getScanned_item().indexOf("P:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("P:") + 3));
 
-        WifiConfiguration wifiConfig = new WifiConfiguration();
+      /*  WifiConfiguration wifiConfig = new WifiConfiguration();
         wifiConfig.SSID = String.format("\"%s\"", networkSSID);
         wifiConfig.preSharedKey = String.format("\"%s\"", networkPass);
-
-        wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(WIFI_SERVICE);
+          wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(WIFI_SERVICE);
 
         if(!wifiManager.isWifiEnabled())
             wifiManager.setWifiEnabled(true);
@@ -504,105 +505,163 @@ public class ScanedText extends Fragment {
         int netId = wifiManager.addNetwork(wifiConfig);
         wifiManager.disconnect();
         wifiManager.enableNetwork(netId, true);
-        wifiManager.reconnect();
+        wifiManager.reconnect();*/
+
+      /*WifiConfiguration conf = new WifiConfiguration();
+        conf.SSID = "\"" + networkSSID + "\"";
+        if (!item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("T:") + 3)).contains("WPA") && item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("T:") + 3)).contains("WEP")) {
+            conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+        } else if (item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("T:") + 3)).contains("WEP")) {
+            conf.wepKeys[0] = "\"" + networkPass + "\"";
+            conf.wepTxKeyIndex = 0;
+            conf.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
+        } else if (item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";", item.getScanned_item().indexOf("T:") + 3)).contains("WPA")) {
+            conf.preSharedKey = "\"" + networkPass + "\"";
+        }
+
+        wifiManager.addNetwork(conf);
+
+        final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Connecting...", true);
+        dialog.show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) ;
+                    {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
+                    }
+                }
+
+                List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
+                for (WifiConfiguration i : list) {
+                    if (i.SSID != null && i.SSID.equals("\"" + networkSSID + "\"")) {
+                        wifiManager.disconnect();
+                        wifiManager.enableNetwork(i.networkId, true);
+                        wifiManager.reconnect();
+                        // startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                        break;
+                    }
+                }
+                dialog.dismiss();
+            }
+        }, 3000); // 3000 milliseconds delay
+*/
+
 
         final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Connecting...", true);
         dialog.show();
 
-        Handler handler = new Handler();
+       /* Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 dialog.dismiss();
             }
-        }, 3000); // 3000 milliseconds delay
+        }, 3000);*/
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3).contains("WPA")) {
+                    Log.i("Found WPA", item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3));
+                    ConnectToNetworkWPA(networkSSID, networkPass);
+                } else if (item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3).contains("WEP")) {
+                    Log.i("Found WPE", item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3));
+                    ConnectToNetworkWEP(networkSSID, networkPass);
+                }
+                dialog.dismiss();
+            }
+        }).start();
 
-
-  /*  WifiConfiguration conf = new WifiConfiguration();
-    conf.SSID ="\""+networkSSID +"\"";
-        if(item.getScanned_item().
-
-    substring(item.getScanned_item().
-
-    indexOf("T:") +2,item.getScanned_item().
-
-    indexOf(";",item.getScanned_item().
-
-    indexOf("T:") +3)).
-
-    contains("WEP"))
-
-    {
-        conf.wepKeys[0] = "\"" + networkPass + "\"";
-        conf.wepTxKeyIndex = 0;
-        conf.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
     }
-        if(item.getScanned_item().
 
-    substring(item.getScanned_item().
+    public boolean ConnectToNetworkWEP(String networkSSID, String password) {
+        try {
+            WifiConfiguration conf = new WifiConfiguration();
+            conf.SSID = "\"" + networkSSID + "\"";   // Please note the quotes. String should contain SSID in quotes
+            conf.wepKeys[0] = "\"" + password + "\""; //Try it with quotes first
 
-    indexOf("T:") +2,item.getScanned_item().
+            conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+            conf.allowedGroupCiphers.set(WifiConfiguration.AuthAlgorithm.OPEN);
+            conf.allowedGroupCiphers.set(WifiConfiguration.AuthAlgorithm.SHARED);
 
-    indexOf(";",item.getScanned_item().
 
-    indexOf("T:") +3)).
+            WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            int networkId = wifiManager.addNetwork(conf);
 
-    contains("WPA"))
+            if (networkId == -1) {
+                //Try it again with no quotes in case of hex password
+                conf.wepKeys[0] = password;
+                networkId = wifiManager.addNetwork(conf);
+            }
 
-    {
-        conf.preSharedKey = "\"" + networkPass + "\"";
-    }
-        if(!item.getScanned_item().
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
+                }
+            }
+            List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
+            for (WifiConfiguration i : list) {
+                if (i.SSID != null && i.SSID.equals("\"" + networkSSID + "\"")) {
+                    wifiManager.disconnect();
+                    wifiManager.enableNetwork(i.networkId, true);
+                    wifiManager.reconnect();
+                    break;
+                }
+            }
 
-    substring(item.getScanned_item().
-
-    indexOf("T:") +2,item.getScanned_item().
-
-    indexOf(";",item.getScanned_item().
-
-    indexOf("T:") +3)).
-
-    contains("WPA") &&item.getScanned_item().
-
-    substring(item.getScanned_item().
-
-    indexOf("T:") +2,item.getScanned_item().
-
-    indexOf(";",item.getScanned_item().
-
-    indexOf("T:") +3)).
-
-    contains("WEP"))
-
-    {
-        conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
-    }
-        wifiManager.addNetwork(conf);
-        if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.M)
-
-    {
-        if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) ;
-        {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
-            return;
+            //WiFi Connection success, return true
+            return true;
+        } catch (Exception ex) {
+            System.out.println(Arrays.toString(ex.getStackTrace()));
+            return false;
         }
     }
 
-    List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
-        for(
-    WifiConfiguration i :list)
+    public boolean ConnectToNetworkWPA(String networkSSID, String password) {
+        try {
+            WifiConfiguration conf = new WifiConfiguration();
+            conf.SSID = "\"" + networkSSID + "\"";   // Please note the quotes. String should contain SSID in quotes
 
-    {
-        if (i.SSID != null && i.SSID.equals("\"" + networkSSID + "\"")) {
-            wifiManager.disconnect();
-            wifiManager.enableNetwork(i.networkId, true);
-            wifiManager.reconnect();
-            startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
-            break;
+            conf.preSharedKey = "\"" + password + "\"";
+
+            conf.status = WifiConfiguration.Status.ENABLED;
+            conf.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
+            conf.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
+            conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+            conf.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
+            conf.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
+
+            Log.d("connecting", conf.SSID + " " + conf.preSharedKey);
+
+            WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            wifiManager.addNetwork(conf);
+
+            Log.d("after connecting", conf.SSID + " " + conf.preSharedKey);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
+                }
+            }
+            List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
+            for (WifiConfiguration i : list) {
+                if (i.SSID != null && i.SSID.equals("\"" + networkSSID + "\"")) {
+                    wifiManager.disconnect();
+                    wifiManager.enableNetwork(i.networkId, true);
+                    wifiManager.reconnect();
+                    Log.d("re connecting", i.SSID + " " + conf.preSharedKey);
+                    break;
+                }
+            }
+
+
+            //WiFi Connection success, return true
+            return true;
+        } catch (Exception ex) {
+            System.out.println(Arrays.toString(ex.getStackTrace()));
+            return false;
         }
-    }*/
-
     }
 
 }
