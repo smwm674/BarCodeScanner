@@ -4,8 +4,7 @@ Barcode Reader and qr code scanner is extremely easy to use; simply point to qr 
 barcode scanner can scan and read all qr / barcode types including text, url, ISBN, product, contact, calendar, email, location, Wi-Fi and many other formats. After scan and automatic decoding user is provided with only the relevant options for individual qr or barcode type and can take appropriate action. You can even use qr code reader to scan coupons / coupon codes to receive discounts and save some money.
 
 
-###Highlighted Features:
-
+### Highlighted Features:
 - Scan Barcode through qr code scanner
 - Generate Barcode and qr code
 - scanner for encrypted qr images
@@ -21,5 +20,9 @@ barcode scanner can scan and read all qr / barcode types including text, url, IS
 
 Give us your feedback about barcode and qr code scanner in our inbox. We will surely listen to you! Enjoy Scanning!
 
-###key features
-barcode reader , qr code reader , qr code scanner.
+### Key Features
+> barcode reader
+> , qr code reader 
+> , qr code scanner
+> , hisoty
+> , favourites
