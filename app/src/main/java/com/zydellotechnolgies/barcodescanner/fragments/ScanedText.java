@@ -7,12 +7,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WifiNetworkSpecifier;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ShareCompat;
@@ -558,21 +564,50 @@ public class ScanedText extends Fragment {
                 dialog.dismiss();
             }
         }, 3000);*/
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3).contains("WPA")) {
-                    Log.i("Found WPA", item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3));
-                    ConnectToNetworkWPA(networkSSID, networkPass);
-                } else if (item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3).contains("WEP")) {
-                    Log.i("Found WPE", item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3));
-                    ConnectToNetworkWEP(networkSSID, networkPass);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if (item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3).contains("WPA")) {
+                        Log.i("Found WPA", item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3));
+                        ConnectToNetworkWPA(networkSSID, networkPass);
+                    } else if (item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3).contains("WEP")) {
+                        Log.i("Found WPE", item.getScanned_item().substring(item.getScanned_item().indexOf("T:") + 2, item.getScanned_item().indexOf(";P:") - 3));
+                        ConnectToNetworkWEP(networkSSID, networkPass);
+                    }
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
-            }
-        }).start();
+            }).start();
+        } else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    WifiNetworkSpecifier.Builder builder = new WifiNetworkSpecifier.Builder();
+                    builder.setSsid(networkSSID);
+                    builder.setWpa2Passphrase(networkPass).build();
 
+                    WifiNetworkSpecifier wifiNetworkSpecifier = builder.build();
+                    NetworkRequest.Builder networkRequestBuilder = new NetworkRequest.Builder();
+                    networkRequestBuilder.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+                    // networkRequestBuilder.addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_RESTRICTED);
+                    //networkRequestBuilder.addCapability(NetworkCapabilities.NET_CAPABILITY_TRUSTED);
+                    networkRequestBuilder.setNetworkSpecifier(wifiNetworkSpecifier);
+                    NetworkRequest networkRequest = networkRequestBuilder.build();
+
+                    ConnectivityManager cm = (ConnectivityManager) getActivity().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                    if (cm != null) {
+                        cm.requestNetwork(networkRequest, new ConnectivityManager.NetworkCallback() {
+                            @Override
+                            public void onAvailable(@NonNull Network network) {
+                                super.onAvailable(network);
+                                cm.bindProcessToNetwork(network);
+                            }
+                        });
+                    }
+                    dialog.dismiss();
+                }
+            }).start();
+        }
     }
 
     public boolean ConnectToNetworkWEP(String networkSSID, String password) {
